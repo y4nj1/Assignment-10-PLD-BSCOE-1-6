@@ -24,7 +24,6 @@ detector = cv2.QRCodeDetector()
 while True:
     _, img = vidcap.read()
     data, one, _ = detector.detectAndDecode(img)
-    codes = []
     if data:
         read = data
         # Record Date and Time of QR Code Detection
