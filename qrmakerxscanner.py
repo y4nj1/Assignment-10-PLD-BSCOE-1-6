@@ -14,6 +14,7 @@ img.save("sampleqr.png")
 # QR Code Scanner
 import cv2
 import webbrowser
+import datetime
 
 vidcap = cv2.VideoCapture(0)
 detector = cv2.QRCodeDetector()
@@ -22,6 +23,10 @@ while True:
     data, one, _ = detector.detectAndDecode(img)
     if data:
         read = data
+        # Record Date and Time of QR Code Detection
+        with open("qrscanrecords.txt", mode='a') as file:
+            file.write('Scanned QR Code recorded at %s.\n' % 
+               (datetime.datetime.now()))
         break
     cv2.imshow('QRCode Scanner', img)
     if cv2.waitKey(1)==ord('a'):
@@ -29,3 +34,7 @@ while True:
 redirect = webbrowser.open((str(read)))
 vidcap.release(read)
 cv2.destroyAllWindows
+
+
+
+
