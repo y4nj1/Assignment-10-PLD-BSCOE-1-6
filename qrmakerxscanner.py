@@ -16,6 +16,8 @@ img.save("sampleqr.png")
 import cv2
 import webbrowser
 import datetime
+import numpy as np
+from pyzbar.pyzbar import decode
 
 vidcap = cv2.VideoCapture(0)
 detector = cv2.QRCodeDetector()
@@ -29,13 +31,19 @@ while True:
             file.write(f'Scanned QR Code redirecting to {link} recorded at %s.\n' % 
                (datetime.datetime.now()))
         break
+    for barcode in decode(img):
+            text = barcode.data.decode('utf-8')
+            print(text)
+            with open("qrscanrecords.txt", mode='a') as file:
+                file.write(f'Scanned QR Code containing {text} recorded at %s.\n' % 
+                (datetime.datetime.now())) 
+            break
     cv2.imshow('QRCode Scanner', img)
     if cv2.waitKey(1)==ord('a'):
         break
 redirect = webbrowser.open((str(read)))
 vidcap.release(read)
 cv2.destroyAllWindows
-
 
 
 
