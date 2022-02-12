@@ -6,7 +6,8 @@ qr = qrcode.QRCode(
     box_size=10,
     border=4,
 )
-qr.add_data("https://github.com/y4nj1")
+link = "https://github.com/y4nj1"
+qr.add_data(link)
 qr.make(fit=True)
 img = qr.make_image(fill_color="black", back_color="white")
 img.save("sampleqr.png")
@@ -25,7 +26,7 @@ while True:
         read = data
         # Record Date and Time of QR Code Detection
         with open("qrscanrecords.txt", mode='a') as file:
-            file.write('Scanned QR Code recorded at %s.\n' % 
+            file.write(f'Scanned QR Code redirecting to {link} recorded at %s.\n' % 
                (datetime.datetime.now()))
         break
     cv2.imshow('QRCode Scanner', img)
