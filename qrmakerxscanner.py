@@ -7,19 +7,6 @@
 #	- You may decide which personal data to include
 #	- All data read from QRCode should be stored in a text file including the date and time it was read
 
-# Create QR Code
-import qrcode
-qr = qrcode.QRCode(
-    version=1,
-    error_correction=qrcode.constants.ERROR_CORRECT_L,
-    box_size=10,
-    border=4,
-)
-link = "https://github.com/y4nj1"
-qr.add_data(link)
-qr.make(fit=True)
-img = qr.make_image(fill_color="black", back_color="white")
-img.save("sampleqr.png")
 
 # QR Code Scanner
 import cv2
